@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_douban/HotMovieData.dart';
 
 class HotMovieItemWidget extends StatefulWidget {
@@ -15,6 +16,7 @@ class HotMovieItemWidget extends StatefulWidget {
 
 class HotMovieItemWidgetState extends State<HotMovieItemWidget> {
 
+  static const methodChannel = const MethodChannel('flutter.doubanmovie/buy');
 
 
   @override
@@ -73,7 +75,10 @@ class HotMovieItemWidgetState extends State<HotMovieItemWidget> {
                   borderSide: BorderSide(
                       color: Colors.red
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    print('点击了');
+                    methodChannel.invokeMethod('buyTicket','购买 ' + widget.hotMovieData.title + ' 电影票一张');
+                  },
                 )
               ],
             ),

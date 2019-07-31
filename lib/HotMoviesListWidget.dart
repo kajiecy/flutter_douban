@@ -6,6 +6,10 @@ import 'package:flutter_douban/HotMovieItemWidget.dart';
 import 'package:http/http.dart' as http;
 
 class HotMoviesListWidget extends StatefulWidget {
+  String curCity ;
+  HotMoviesListWidget(String city){
+    curCity = city;
+  }
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -24,7 +28,7 @@ class HotMoviesListWidgetState extends State<HotMoviesListWidget> with Automatic
   void _getData() async {
     List<HotMovieData> serverDataList = new List();
     var response = await http.get(
-        'https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=%E6%B7%B1%E5%9C%B3&start=0&count=10&client=&udid=');
+        'https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city='+widget.curCity+'&start=0&count=10&client=&udid=');
     //成功获取数据
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
